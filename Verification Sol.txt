@@ -1,0 +1,38 @@
+pragma solidity ^0.4.17;
+contract Verification
+{
+    
+        string [] hash;
+        string url;
+        
+        
+        function setUrl(string _url) public
+        {
+            url=_url;
+        }
+        
+        function addHash(string _hast) public
+        {
+            hash.push(_hast);
+            
+        }
+        function getUrl() public view returns (string)
+        {
+            return url;
+            
+        }
+        function getHashLength() public view returns(uint){
+            return hash.length;
+        }
+        
+        
+        // function checkHash (string _hash) public view returns(){
+            
+        // }
+        
+        function getHash(uint index) public view returns (string)
+        {
+            return hash[index];
+        }
+        
+}
