@@ -2,7 +2,11 @@ pragma solidity ^0.4.17;
 contract Verification
 {
     
+    
+
         string [] hash;
+        struct MyInfo
+        {
         string firstName;
         string lastName;
         string age;
@@ -13,158 +17,64 @@ contract Verification
         string nationalID;
         string dateOfBirth;
         string placeOfBirth;
+        }
+        mapping (string =>MyInfo) mappingInfo;
         
         string url;
         mapping (string=>string)mappingTrans;
+
+       function getDateOfBirth(string _hash) public view returns (string)
+       {
+           return mappingInfo[_hash].dateOfBirth;
+       }
+  
+       function getPlaceOfBirth(string _hash) public view returns (string)
+       {
+           return mappingInfo[_hash].placeOfBirth;
+       }
         
-        
-        
-        function setInfo(string _firstName,string _lastName,string _age,string _sex,string _gpa,string _major,string _universityName ,string _nationalID,string _dateOfBirth,string _placeOfBirth)
-        public
-        {
-                    dateOfBirth=_dateOfBirth;
-                               placeOfBirth=_placeOfBirth;
-                                          nationalID=_nationalID;
-                                                     firstName=_firstName;
-                                                                lastName=_lastName;
-                                                                               age=_age;
-                                                                                      sex=_sex;
-                                                                                                 major=_major;
-                                                                                                            gpa=_gpa;
-                                                                                                                       universityName=_universityName;
+ 
+       function getNationalID(string _hash) public view returns (string)
+       {
+           return mappingInfo[_hash].nationalID;
+       }
 
+       function getFirstName(string _hash) public view returns (string)
+       {
+           return mappingInfo[_hash].firstName;
+       }
+       
 
+       function getLastName(string _hash) public view returns (string)
+       {
+           return mappingInfo[_hash].lastName;
+       }
 
+       function getAge(string _hash) public view returns (string)
+       {
+           return mappingInfo[_hash].age;
+       }
 
+       function getSex(string _hash) public view returns (string)
+       {
+           return mappingInfo[_hash].sex;
+       }
+       
 
+       function getMajor(string _hash) public view returns (string)
+       {
+           return mappingInfo[_hash].major;
+       }
 
-
-
-
+       function getGPA(string _hash) public view returns (string)
+       {
+           return mappingInfo[_hash].gpa;
+       }
+       
    
-        }
-        
-    //       function setDateOfBirth  (string _dateOfBirth)public
-    //   {
-    //       dateOfBirth=_dateOfBirth;
-    //   }
-       function getDateOfBirth() public view returns (string)
+       function getUniversityName(string _hash) public view returns (string)
        {
-           return dateOfBirth;
-       }
-        
-        
-        
-        
-        
-        
-    //           function setPlaceOfBirth  (string _placeOfBirth)public
-    //   {
-    //       placeOfBirth=_placeOfBirth;
-    //   }
-       function getPlaceOfBirth() public view returns (string)
-       {
-           return placeOfBirth;
-       }
-        
-        
-        
-        
-        
-           
-    //   function setNationalID  (string _nationalID)public
-    //   {
-    //       nationalID=_nationalID;
-    //   }
-       function getNationalID() public view returns (string)
-       {
-           return nationalID;
-       }
-       
-       
-       
-       
-    //       function setFirstName  (string _firstName)public
-    //   {
-    //       firstName=_firstName;
-    //   }
-       function getFirstName() public view returns (string)
-       {
-           return firstName;
-       }
-       
-       
-       
-       
-    //   function setLastName  (string _lastName)public
-    //   {
-    //       lastName=_lastName;
-    //   }
-       function getLastName() public view returns (string)
-       {
-           return lastName;
-       }
-       
-       
-       
-       
-           
-    
-       
-       
-       
-    //     function setAge  (string _age)public
-    //   {
-    //       age=_age;
-    //   }
-       function getAge() public view returns (string)
-       {
-           return age;
-       }
-       
-       
-       
-    //     function setSex  (string _sex)public
-    //   {
-    //       sex=_sex;
-    //   }
-       function getSex() public view returns (string)
-       {
-           return sex;
-       }
-       
-       
-       
-       
-    //       function setMajor (string _major)public
-    //   {
-    //       major=_major;
-    //   }
-       function getMajor() public view returns (string)
-       {
-           return major;
-       }
-       
-       
-    //          function setGPA (string _gpa)public
-    //   {
-    //       gpa=_gpa;
-    //   }
-       function getGPA() public view returns (string)
-       {
-           return gpa;
-       }
-       
-       
-       
-       
-    //   function setUniversityName (string _universityName)public
-    //   {
-    //       universityName=_universityName;
-    //   }
-       function getUniversityName() public view returns (string)
-       {
-           return universityName;
+           return mappingInfo[_hash].universityName;
        }
        
        
@@ -186,9 +96,10 @@ contract Verification
             url=_url;
         }
        
-        function addHash(string _hash) public
+        function addHash(string _hash,string _firstName,string _lastName,string _age,string _sex,string _gpa,string _major,string _universityName ,string _nationalID,string _dateOfBirth,string _placeOfBirth) public
         {
             hash.push(_hash);
+            mappingInfo[_hash]=MyInfo(_firstName,_lastName,_age,_sex,_gpa,_major,_universityName,_nationalID,_dateOfBirth,_placeOfBirth);
          
            
         }
