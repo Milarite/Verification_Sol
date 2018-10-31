@@ -19,11 +19,35 @@ contract Verification
         
         
         
+        function setInfo(string _firstName,string _lastName,string _age,string _sex,string _gpa,string _major,string _universityName ,string _nationalID,string _dateOfBirth,string _placeOfBirth)
+        public
+        {
+                    dateOfBirth=_dateOfBirth;
+                               placeOfBirth=_placeOfBirth;
+                                          nationalID=_nationalID;
+                                                     firstName=_firstName;
+                                                                lastName=_lastName;
+                                                                               age=_age;
+                                                                                      sex=_sex;
+                                                                                                 major=_major;
+                                                                                                            gpa=_gpa;
+                                                                                                                       universityName=_universityName;
+
+
+
+
+
+
+
+
+
+   
+        }
         
-           function setDateOfBirth  (string _dateOfBirth)public
-       {
-           dateOfBirth=_dateOfBirth;
-       }
+    //       function setDateOfBirth  (string _dateOfBirth)public
+    //   {
+    //       dateOfBirth=_dateOfBirth;
+    //   }
        function getDateOfBirth() public view returns (string)
        {
            return dateOfBirth;
@@ -34,10 +58,10 @@ contract Verification
         
         
         
-              function setPlaceOfBirth  (string _placeOfBirth)public
-       {
-           placeOfBirth=_placeOfBirth;
-       }
+    //           function setPlaceOfBirth  (string _placeOfBirth)public
+    //   {
+    //       placeOfBirth=_placeOfBirth;
+    //   }
        function getPlaceOfBirth() public view returns (string)
        {
            return placeOfBirth;
@@ -48,10 +72,10 @@ contract Verification
         
         
            
-       function setNationalID  (string _nationalID)public
-       {
-           nationalID=_nationalID;
-       }
+    //   function setNationalID  (string _nationalID)public
+    //   {
+    //       nationalID=_nationalID;
+    //   }
        function getNationalID() public view returns (string)
        {
            return nationalID;
@@ -60,10 +84,10 @@ contract Verification
        
        
        
-          function setFirstName  (string _firstName)public
-       {
-           firstName=_firstName;
-       }
+    //       function setFirstName  (string _firstName)public
+    //   {
+    //       firstName=_firstName;
+    //   }
        function getFirstName() public view returns (string)
        {
            return firstName;
@@ -72,10 +96,10 @@ contract Verification
        
        
        
-       function setLastName  (string _lastName)public
-       {
-           lastName=_lastName;
-       }
+    //   function setLastName  (string _lastName)public
+    //   {
+    //       lastName=_lastName;
+    //   }
        function getLastName() public view returns (string)
        {
            return lastName;
@@ -89,10 +113,10 @@ contract Verification
        
        
        
-        function setAge  (string _age)public
-       {
-           age=_age;
-       }
+    //     function setAge  (string _age)public
+    //   {
+    //       age=_age;
+    //   }
        function getAge() public view returns (string)
        {
            return age;
@@ -100,10 +124,10 @@ contract Verification
        
        
        
-        function setSex  (string _sex)public
-       {
-           sex=_sex;
-       }
+    //     function setSex  (string _sex)public
+    //   {
+    //       sex=_sex;
+    //   }
        function getSex() public view returns (string)
        {
            return sex;
@@ -112,20 +136,20 @@ contract Verification
        
        
        
-           function setMajor (string _major)public
-       {
-           major=_major;
-       }
+    //       function setMajor (string _major)public
+    //   {
+    //       major=_major;
+    //   }
        function getMajor() public view returns (string)
        {
            return major;
        }
        
        
-             function setGPA (string _gpa)public
-       {
-           gpa=_gpa;
-       }
+    //          function setGPA (string _gpa)public
+    //   {
+    //       gpa=_gpa;
+    //   }
        function getGPA() public view returns (string)
        {
            return gpa;
@@ -134,10 +158,10 @@ contract Verification
        
        
        
-      function setUniversityName (string _universityName)public
-       {
-           universityName=_universityName;
-       }
+    //   function setUniversityName (string _universityName)public
+    //   {
+    //       universityName=_universityName;
+    //   }
        function getUniversityName() public view returns (string)
        {
            return universityName;
