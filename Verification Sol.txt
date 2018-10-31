@@ -3,36 +3,175 @@ contract Verification
 {
     
         string [] hash;
+        string name;
+        string age;
+        string sex;
+        string gpa;
+        string major;
+        string universityName;
+        string nationalID;
+        string dateOfBirth;
+        string placeOfBirth;
+        
         string url;
+        mapping (string=>string)mappingTrans;
         
         
+        
+        
+           function setDateOfBirth  (string _dateOfBirth)public
+       {
+           dateOfBirth=_dateOfBirth;
+       }
+       function getDateOfBirth() public view returns (string)
+       {
+           return dateOfBirth;
+       }
+        
+        
+        
+        
+        
+        
+              function setPlaceOfBirth  (string _placeOfBirth)public
+       {
+           placeOfBirth=_placeOfBirth;
+       }
+       function getPlaceOfBirth() public view returns (string)
+       {
+           return placeOfBirth;
+       }
+        
+        
+        
+        
+        
+           
+       function setNationalID  (string _nationalID)public
+       {
+           nationalID=_nationalID;
+       }
+       function getNationalID() public view returns (string)
+       {
+           return nationalID;
+       }
+       
+       function setName  (string _name)public
+       {
+           name=_name;
+       }
+       function getName() public view returns (string)
+       {
+           return name;
+       }
+       
+       
+       
+        function setAge  (string _age)public
+       {
+           age=_age;
+       }
+       function getAge() public view returns (string)
+       {
+           return age;
+       }
+       
+       
+       
+        function setSex  (string _sex)public
+       {
+           sex=_sex;
+       }
+       function getSex() public view returns (string)
+       {
+           return sex;
+       }
+       
+       
+       
+       
+           function setMajor (string _major)public
+       {
+           major=_major;
+       }
+       function getMajor() public view returns (string)
+       {
+           return major;
+       }
+       
+       
+             function setGPA (string _gpa)public
+       {
+           gpa=_gpa;
+       }
+       function getGPA() public view returns (string)
+       {
+           return gpa;
+       }
+       
+       
+       
+       
+      function setUniversityName (string _universityName)public
+       {
+           universityName=_universityName;
+       }
+       function getUniversityName() public view returns (string)
+       {
+           return universityName;
+       }
+       
+       
+       
+        function checkHashExsist(string _hast) public view returns (bool)
+        {
+            for(uint i=0;i<hash.length;i++)
+            {
+                if(keccak256(abi.encodePacked(hash[i]))==keccak256(abi.encodePacked(_hast)))
+                {
+                return true;
+                break;
+                }
+            }
+            return false;
+        }
         function setUrl(string _url) public
         {
             url=_url;
         }
-        
-        function addHash(string _hast) public
+       
+        function addHash(string _hash) public
         {
-            hash.push(_hast);
-            
+            hash.push(_hash);
+         
+           
+        }
+        function saveTransaction(string _hash,string _transaction) public
+        {
+              mappingTrans[_hash]=_transaction;
         }
         function getUrl() public view returns (string)
         {
             return url;
-            
+           
         }
         function getHashLength() public view returns(uint){
             return hash.length;
         }
-        
-        
+       
+       
         // function checkHash (string _hash) public view returns(){
-            
+           
         // }
-        
+       
         function getHash(uint index) public view returns (string)
         {
             return hash[index];
         }
-        
+        function getTransactions(string _hash)public view returns(string)
+        {
+            return mappingTrans[_hash];
+        }
+
+       
 }
