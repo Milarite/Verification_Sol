@@ -1,5 +1,6 @@
 pragma solidity ^0.4.17;
-contract Verification
+import './Authorizable.sol';
+contract Verification is Authorizable
 {
     
     
@@ -79,7 +80,7 @@ contract Verification
        
        
        
-        function checkHashExsist(string _hast) public view returns (bool)
+        function checkHashExsist(string _hast) public onlyAuth view  returns  (bool)
         {
             for(uint i=0;i<hash.length;i++)
             {
@@ -91,19 +92,20 @@ contract Verification
             }
             return false;
         }
-        function setUrl(string _url) public
+        function setUrl(string _url) public onlyAuth
         {
             url=_url;
         }
        
         function addHash(string _hash,string _firstName,string _lastName,string _age,string _sex,string _gpa,string _major,string _universityName ,string _nationalID,string _dateOfBirth,string _placeOfBirth) public
+        onlyAuth
         {
             hash.push(_hash);
             mappingInfo[_hash]=MyInfo(_firstName,_lastName,_age,_sex,_gpa,_major,_universityName,_nationalID,_dateOfBirth,_placeOfBirth);
          
            
         }
-        function saveTransaction(string _hash,string _transaction) public
+        function saveTransaction(string _hash,string _transaction) public onlyAuth
         {
               mappingTrans[_hash]=_transaction;
         }
