@@ -1,12 +1,16 @@
 pragma solidity ^0.4.17;
-import './Authorizable.sol';
-contract Verification is Authorizable
+contract Verification
 {
-    
-    
 
         string [] hash;
-        struct MyInfo
+        address adminAddress=0xB248D34f2431824Afe5147170fB98A7Aa0F7499D;
+        struct uploaderInfo
+        {
+            
+            string username;
+            string password;
+        }
+        struct generalInfo
         {
         string firstName;
         string lastName;
@@ -18,11 +22,46 @@ contract Verification is Authorizable
         string nationalID;
         string dateOfBirth;
         string placeOfBirth;
+        string uploader;
         }
-        mapping (string =>MyInfo) mappingInfo;
+        mapping (string => uploaderInfo) mappingUploder;
+        mapping (string =>generalInfo) mappingInfo;
+        mapping (string =>bool) mappingCheckSignedupBefore;
+        
         
         string url;
         mapping (string=>string)mappingTrans;
+        
+        function signupUploader (string _username,string _password) public
+        {
+            mappingUploder[_username]=uploaderInfo(_username,_password);
+            mappingCheckSignedupBefore[_username]=true;
+            
+        }
+        function checkSignedupBefore(string _username)public view returns (bool)
+        {
+            if(mappingCheckSignedupBefore[_username]==true)
+            return true;
+            else
+            return false;
+        }
+        
+        function signinAdmin(address _address)public view returns (bool)
+        {
+            if(_address==adminAddress)
+             return true;   
+             else
+            return false;
+        }
+        
+        function signinUploader(string _username,string _password) public view returns (bool)
+        {
+            if(keccak256(abi.encodePacked(mappingUploder[_username].password))==keccak256(abi.encodePacked(_password)))
+            return true;
+            else
+            return false;
+        }
+     
 
        function getDateOfBirth(string _hash) public view returns (string)
        {
@@ -80,7 +119,7 @@ contract Verification is Authorizable
        
        
        
-        function checkHashExsist(string _hast) public onlyAuth view  returns  (bool)
+        function checkHashExsist(string _hast) public  view  returns  (bool)
         {
             for(uint i=0;i<hash.length;i++)
             {
@@ -92,20 +131,20 @@ contract Verification is Authorizable
             }
             return false;
         }
-        function setUrl(string _url) public onlyAuth
+        function setUrl(string _url) public 
         {
             url=_url;
         }
        
-        function addHash(string _hash,string _firstName,string _lastName,string _age,string _sex,string _gpa,string _major,string _universityName ,string _nationalID,string _dateOfBirth,string _placeOfBirth) public
-        onlyAuth
+        function addHash(string _hash,string _firstName,string _lastName,string _age,string _sex,string _gpa,string _major,string _universityName ,string _nationalID,string _dateOfBirth,string _placeOfBirth,string uploader) public
+        
         {
             hash.push(_hash);
-            mappingInfo[_hash]=MyInfo(_firstName,_lastName,_age,_sex,_gpa,_major,_universityName,_nationalID,_dateOfBirth,_placeOfBirth);
+            mappingInfo[_hash]=generalInfo(_firstName,_lastName,_age,_sex,_gpa,_major,_universityName,_nationalID,_dateOfBirth,_placeOfBirth,uploader);
          
            
         }
-        function saveTransaction(string _hash,string _transaction) public onlyAuth
+        function saveTransaction(string _hash,string _transaction) public 
         {
               mappingTrans[_hash]=_transaction;
         }
