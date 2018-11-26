@@ -1,52 +1,126 @@
-pragma solidity ^0.4.17;
+pragma solidity ^0.5.0;
 contract Verification
 {
 
         string [] hash;
-        
-        
-        
-        
-        struct owner
+        address adminAddress=0xB248D34f2431824Afe5147170fB98A7Aa0F7499D;
+        struct uploaderInfo
         {
             
-            bytes32 username;
-            bytes32 password;
+            string username;
+            string password;
         }
         struct generalInfo
         {
-        string tx;
-        bytes32 firstName;
-        bytes32 lastName;
-       bytes32 [9] moreInfo;
-       
-       
+        string firstName;
+        string lastName;
+        string age;
+        string sex;
+        string gpa;
+        string major;
+        string universityName;
+        string nationalID;
+        string dateOfBirth;
+        string placeOfBirth;
+        string studentId ;
+        string uploader;
         }
-        mapping (bytes32 => owner) ownerMapping;
+        mapping (string => uploaderInfo) mappingUploder;
         mapping (string =>generalInfo) mappingInfo;
         mapping (string =>bool) mappingCheckSignedupBefore;
         
         
         string url;
-        mapping (string=>generalInfo)mappingTrans;
+        mapping (string=>string)mappingTrans;
         
-        function addOwner (bytes32 _username,bytes32 _password) public
+        function signupUploader (string memory _username,string memory _password) public
         {
-            ownerMapping[_username]=owner(_username,_password);
-
+            mappingUploder[_username]=uploaderInfo(_username,_password);
+            mappingCheckSignedupBefore[_username]=true;
+            
         }
-       
-        function checkSignedBefore(bytes32 _username)public view returns(bytes32,bytes32){
-            return (ownerMapping[_username].username,ownerMapping[_username].password);
+        function checkSignedupBefore(string memory _username)public view returns (bool)
+        {
+            if(mappingCheckSignedupBefore[_username]==true)
+            return true;
+            else
+            return false;
         }
         
+        function signinAdmin(address _address)public view returns (bool)
+        {
+            if(_address==adminAddress)
+             return true;   
+             else
+            return false;
+        }
+        
+        function signinUploader(string memory _username,string memory _password) public view returns (bool)
+        {
+            if(keccak256(abi.encodePacked(mappingUploder[_username].password))==keccak256(abi.encodePacked(_password)))
+            return true;
+            else
+            return false;
+        }
+     
+
+       function getDateOfBirth(string memory _hash) public view returns (string memory)
+       {
+           return mappingInfo[_hash].dateOfBirth;
+       }
   
+       function getPlaceOfBirth(string memory _hash) public view returns (string memory)
+       {
+           return mappingInfo[_hash].placeOfBirth;
+       }
         
-        
+ 
+       function getNationalID(string memory _hash) public view returns (string memory)
+       {
+           return mappingInfo[_hash].nationalID;
+       }
 
+       function getFirstName(string memory _hash) public view returns (string memory)
+       {
+           return mappingInfo[_hash].firstName;
+       }
+       
+
+       function getLastName(string memory _hash) public view returns (string memory)
+       {
+           return mappingInfo[_hash].lastName;
+       }
+
+       function getAge(string memory _hash) public view returns (string memory)
+       {
+           return mappingInfo[_hash].age;
+       }
+
+       function getSex(string memory _hash) public view returns (string memory)
+       {
+           return mappingInfo[_hash].sex;
+       }
+       
+
+       function getMajor(string memory _hash) public view returns (string memory)
+       {
+           return mappingInfo[_hash].major;
+       }
+
+       function getGPA(string memory _hash) public view returns (string memory)
+       {
+           return mappingInfo[_hash].gpa;
+       }
+       
+   
+       function getUniversityName(string memory _hash) public view returns (string memory)
+       {
+           return mappingInfo[_hash].universityName;
+       }
        
        
-        function checkHashExsist(string _hast) public  view  returns  (bool)
+       
+        function checkHashExsist(string memory _hast) public  view  returns  (bool)
         {
             for(uint i=0;i<hash.length;i++)
             {
@@ -58,34 +132,24 @@ contract Verification
             }
             return false;
         }
-        function setUrl(string _url) public 
+        function setUrl(string memory _url) public 
         {
             url=_url;
         }
        
-        function addHash(string tx,string _hash,bytes32 _firstName,bytes32 _lastName,bytes32 _age,bytes32 _sex,bytes32 _gpa,bytes32 _major,bytes32 _universityName ,bytes32 _nationalID,bytes32 _dateOfBirth,bytes32 _placeOfBirth,bytes32 uploader) public
+        function addHash(string memory _hash,string memory _firstName,string memory _lastName,string memory _age,string memory _sex,string memory _gpa,string memory _major,string memory _universityName ,string memory _nationalID,string memory _dateOfBirth,string memory _placeOfBirth,string memory _studentId,string memory uploader) public
         
         {
             hash.push(_hash);
-            bytes32  [9] memory moreInfo  =[_age,_sex,_gpa,_major,_universityName,_nationalID,_dateOfBirth,_placeOfBirth,uploader];
-            mappingInfo[_hash]=generalInfo(tx,_firstName,_lastName , moreInfo );
-            
-            
-            
-            
-            
-            
-            
-            
-            
-  
+            mappingInfo[_hash]=generalInfo(_firstName,_lastName,_age,_sex,_gpa,_major,_universityName,_nationalID,_dateOfBirth,_placeOfBirth,_studentId,uploader);
          
            
-          
-           
         }
-       
-        function getUrl() public view returns (string)
+        function saveTransaction(string memory _hash,string memory _transaction) public 
+        {
+              mappingTrans[_hash]=_transaction;
+        }
+        function getUrl() public view returns (string memory)
         {
             return url;
            
@@ -99,42 +163,14 @@ contract Verification
            
         // }
        
-        function getHash(uint index) public view returns (string)
+        function getHash(uint index) public view returns (string memory)
         {
             return hash[index];
         }
-        
-        
-        function getAllInformation(string _hash) public view returns(string ,
-        bytes32,bytes32,bytes32[9]){
-            
-            return (
-                mappingTrans[_hash].tx,
-                mappingTrans[_hash].firstName,
-                mappingTrans[_hash].lastName,
-                mappingTrans[_hash].moreInfo
-               );
-              
-                
-           
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-               
-            
-            
+        function getTransactions(string memory _hash)public view returns(string memory)
+        {
+            return mappingTrans[_hash];
         }
-      
-        
-        
-    
 
        
 }
