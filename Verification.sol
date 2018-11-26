@@ -55,13 +55,13 @@ contract Verification
             return false;
         }
         
-        function signinUploader(string memory _username,string memory _password) public view returns (bool)
-        {
-            if(keccak256(abi.encodePacked(mappingUploder[_username].password))==keccak256(abi.encodePacked(_password)))
-            return true;
-            else
-            return false;
-        }
+        // function signinUploader(string memory _username,string memory _password) public view returns (bool)
+        // {
+        //     if(keccak256(abi.encodePacked(mappingUploder[_username].password))==keccak256(abi.encodePacked(_password)))
+        //     return true;
+        //     else
+        //     return false;
+        // }
      
 
        function getDateOfBirth(string memory _hash) public view returns (string memory)
@@ -120,17 +120,14 @@ contract Verification
        
        
        
-        function checkHashExsist(string memory _hast) public  view  returns  (bool)
+        function checkSignedBefore(string memory _hash) public  view  returns  (  string memory,string memory)
         {
-            for(uint i=0;i<hash.length;i++)
-            {
-                if(keccak256(abi.encodePacked(hash[i]))==keccak256(abi.encodePacked(_hast)))
-                {
-                return true;
-                break;
-                }
-            }
-            return false;
+           
+           
+           return (mappingUploder[_hash].username,mappingUploder[_hash].password);
+           
+           
+           
         }
         function setUrl(string memory _url) public 
         {
