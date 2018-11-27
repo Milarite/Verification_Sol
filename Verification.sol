@@ -7,7 +7,7 @@ contract Verification
         struct uploaderInfo
         {
             
-            string username;
+            string  username;
             string password;
         }
         struct generalInfo
@@ -167,6 +167,10 @@ contract Verification
         function getTransactions(string memory _hash)public view returns(string memory)
         {
             return mappingTrans[_hash];
+        }
+        
+        function addOwner (string memory username , string memory password) public {
+            mappingUploder[username] = uploaderInfo(username,password);
         }
 
        
