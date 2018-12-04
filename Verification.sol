@@ -1,4 +1,5 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.4.24;
+
 contract Verification
 {
 
@@ -118,6 +119,10 @@ contract Verification
            return mappingInfo[_hash].universityName;
        }
        
+       
+       function getStudentId(string memory _hash ) public view returns (string memory){
+           return mappingInfo[_hash].studentId ;
+       }
        
        
         function checkSignedBefore(string memory _hash) public  view  returns  (  string memory,string memory)
